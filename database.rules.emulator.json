@@ -4,6 +4,9 @@
     ".write": true,
     "users": {
       ".indexOn": ["email"]
+    },
+    "accounts": {
+      ".indexOn": ["uid"]
     }
   }
 }
