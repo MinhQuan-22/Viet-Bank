@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Auth Emulator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+      }
+      .result {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      .success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+      }
+      .error {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .info {
+        background-color: #d1ecf1;
+        border: 1px solid #bee5eb;
+        color: #0c5460;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🔐 Test Auth Emulator Connection</h1>
+
+    <div class="info">
+      <strong>Test Credentials:</strong><br />
+      Email: thehoang.acc@gmail.com<br />
+      Password: Thedeptrai1
+    </div>
+
+    <button onclick="testAuthEmulator()">Test Login</button>
+
+    <div id="result"></div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import {
+        getAuth,
+        connectAuthEmulator,
+        signInWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBaBxbCTIyyQ66zaYxlyrlDWMUSR0XVyuk",
+        authDomain: "vietbank-final.firebaseapp.com",
+        projectId: "vietbank-final",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // Connect to Auth Emulator
+      console.log("🔧 Connecting to Auth Emulator...");
+      connectAuthEmulator(auth, "http://127.0.0.1:9099", {
+        disableWarnings: true,
+      });
+      console.log("✅ Connected to Auth Emulator");
+
+      window.testAuthEmulator = async function () {
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = '<div class="result">Testing...</div>';
+
+        try {
+          console.log("🔐 Attempting login...");
+          const userCredential = await signInWithEmailAndPassword(
+            auth,
+            "thehoang.acc@gmail.com",
+            "Thedeptrai1",
+          );
+
+          const user = userCredential.user;
+          console.log("✅ Login successful!", user);
+
+          resultDiv.innerHTML = `
+                    <div class="result success">
+                        <strong>✅ Login Successful!</strong><br><br>
+                        <strong>UID:</strong> ${user.uid}<br>
+                        <strong>Email:</strong> ${user.email}<br>
+                        <strong>Email Verified:</strong> ${user.emailVerified}<br>
+                        <br>
+                        <strong>Auth Emulator is working correctly! 🎉</strong>
+                    </div>
+                `;
+        } catch (error) {
+          console.error("❌ Login failed:", error);
+          resultDiv.innerHTML = `
+                    <div class="result error">
+                        <strong>❌ Login Failed</strong><br><br>
+                        <strong>Error Code:</strong> ${error.code}<br>
+                        <strong>Error Message:</strong> ${error.message}<br>
+                        <br>
+                        <strong>Possible Issues:</strong><br>
+                        1. Auth Emulator not running<br>
+                        2. Account not created in emulator<br>
+                        3. Wrong credentials<br>
+                        4. Browser blocking localhost connection
+                    </div>
+                `;
+        }
+      };
+
+      // Auto-test on load
+      console.log("🚀 Page loaded, ready to test");
+    </script>
+  </body>
+</html>
