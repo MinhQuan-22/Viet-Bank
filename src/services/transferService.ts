@@ -64,11 +64,8 @@ interface RtdbTransaction {
   executedAt: number | null;
   isInternal?: boolean;
   destAccUid?: string | null;
-
-  // ✅ NEW
   requiresBiometric?: boolean;
   biometricVerifiedAt?: number | null;
-
   [key: string]: unknown;
 }
 
@@ -230,8 +227,8 @@ type OtpEmailGatewayResponse = {
 };
 
 /**
- * ✅ Gửi OTP qua Email gateway (Apps Script Web App).
- * - Nếu chưa cấu hình URL => fallback DEV để app không crash.
+ * Send OTP via Email gateway (Apps Script Web App).
+ * Falls back to dev logging if gateway URL is not configured.
  */
 async function sendOtpEmail(
   email: string,
@@ -258,7 +255,7 @@ async function sendOtpEmail(
   params.set("purpose", "TRANSFER");
   if (apiKey) params.set("apiKey", apiKey);
 
-  // ✅ no-cors: request vẫn gửi được tới Apps Script, tránh bị browser chặn CORS
+  // Use no-cors mode to avoid CORS issues with Apps Script
   try {
     await fetch(url, {
       method: "POST",
@@ -271,7 +268,7 @@ async function sendOtpEmail(
   } catch {
     throw new Error("Không gửi được OTP email. Vui lòng thử lại.");
   }
-  // ⚠️ Vì no-cors => không đọc được response. Nhưng mail vẫn được gửi nếu server OK.
+  // Note: no-cors mode prevents reading response, but email is sent if server is OK
   return;
 }
 
@@ -279,8 +276,7 @@ function toNumber(v: number | string): number {
   return typeof v === "number" ? v : Number(v) || 0;
 }
 
-// ===================== NEW: MARK BIOMETRIC =====================
-
+// Mark biometric verification for high-value transactions
 export async function markTransactionBiometricVerified(
   transactionId: string,
 ): Promise<void> {
@@ -476,7 +472,7 @@ export async function initiateTransferToAccount(
 
   await set(ref(firebaseRtdb, `transactionOtps/${txnId}`), otpData);
 
-  // ✅ Gửi OTP qua Email gateway (Apps Script). Nếu chưa cấu hình thì fallback DEV log.
+  // Send OTP via Email gateway (Apps Script). Falls back to dev logging if not configured.
   await sendOtpEmail(email, otpCode, txnId);
 
   if (req.saveRecipient) {
@@ -552,7 +548,7 @@ export async function resendTransferOtp(
 
   const now = Date.now();
 
-  // ✅ RÀNG BUỘC CHÍNH: chỉ cho gửi lại khi OTP đã hết hạn
+  // Only allow resend when OTP has expired
   if (now < otpData.expireAt) {
     const remainSec = Math.max(1, Math.ceil((otpData.expireAt - now) / 1000));
     throw new Error(
