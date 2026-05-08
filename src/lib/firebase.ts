@@ -6,7 +6,11 @@ import {
   connectFirestoreEmulator,
   type Firestore,
 } from "firebase/firestore";
-import { getDatabase, type Database } from "firebase/database";
+import {
+  getDatabase,
+  connectDatabaseEmulator,
+  type Database,
+} from "firebase/database";
 import {
   connectFunctionsEmulator,
   getFunctions,
@@ -71,8 +75,23 @@ export const fbRtdb: Database = getDatabase(fbApp);
 export const functionsRegion = "asia-southeast1";
 export const fbFns: Functions = getFunctions(fbApp, functionsRegion);
 
-// Connect Functions emulator if needed
+// Connect emulators if needed
 if (useEmulator) {
+  // Connect Realtime Database Emulator
+  try {
+    console.info(
+      "[firebase] Connecting Realtime Database to emulator: 127.0.0.1:9000",
+    );
+    connectDatabaseEmulator(fbRtdb, "127.0.0.1", 9000);
+    console.info("[firebase] ✅ Realtime Database connected to emulator");
+  } catch (error) {
+    console.error(
+      "[firebase] ❌ Failed to connect Realtime Database to emulator:",
+      error,
+    );
+  }
+
+  // Connect Functions Emulator
   try {
     console.info("[firebase] Connecting Functions to emulator: 127.0.0.1:5001");
     connectFunctionsEmulator(fbFns, "127.0.0.1", 5001);
@@ -84,7 +103,7 @@ if (useEmulator) {
     );
   }
 
-  // Only connect Auth emulator if explicitly enabled
+  // Connect Auth Emulator
   if (import.meta.env?.VITE_USE_AUTH_EMULATOR === "true") {
     console.info("[firebase] Auth emulator enabled");
     connectAuthEmulator(fbAuth, "http://127.0.0.1:9099", {
