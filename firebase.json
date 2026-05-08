@@ -4,7 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "database": {
-    "rules": "database.rules.json"
+    "rules": "database.rules.emulator.json"
   },
   "functions": {
     "source": "functions",
@@ -19,6 +19,9 @@
     ]
   },
   "emulators": {
+    "auth": {
+      "port": 9099
+    },
     "functions": {
       "port": 5001
     },
