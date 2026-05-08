@@ -173,7 +173,6 @@ const App = () => (
             }
           />
 
-          {/* ✅ [PATCH-ADD-TRANSFER-BIOMETRIC-ROUTE] thêm từ code (2) */}
           <Route
             path="/transfer/biometric"
             element={
@@ -184,7 +183,6 @@ const App = () => (
             }
           />
 
-          {/* ✅ [PATCH-ADD-TRANSFER-OTP-ROUTE] thêm từ code (2) */}
           <Route path="/transfer/otp" element={<TransferOtpConfirm />} />
 
           {/* Accounts list */}
@@ -209,7 +207,6 @@ const App = () => (
             }
           />
 
-          {/* ✅ [PATCH-ADD-PAYMENT-DEPOSIT-ROUTE] thêm từ code (2) */}
           <Route
             path="/accounts/payment/deposit"
             element={
@@ -220,7 +217,6 @@ const App = () => (
             }
           />
 
-          {/* ✅ [PATCH-ADD-PAYMENT-WITHDRAW-ROUTE] thêm từ code (2) */}
           <Route
             path="/accounts/payment/withdraw"
             element={
