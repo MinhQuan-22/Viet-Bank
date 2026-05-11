@@ -108,7 +108,7 @@ export default function MovieBooking() {
   // Load accounts when entering step 3
   useEffect(() => {
     if (step === 3 && accounts.length === 0) {
-      console.log("🔄 Step 3 mounted, loading accounts...");
+      /* console.log removed */
       loadAccounts();
     }
   }, [step]);
@@ -138,12 +138,12 @@ export default function MovieBooking() {
         };
         const resolved =
           provinceToKey[selectedProvince] || `VN_${selectedProvince}`;
-        console.log(`🗺️ Resolved province ${selectedProvince} → ${resolved}`);
+        /* console.log removed */
         return resolved;
       }
     } else {
       if (selectedIntlCity) {
-        console.log(`🌍 International city: ${selectedIntlCity}`);
+        /* console.log removed */
         return selectedIntlCity;
       }
     }
@@ -229,7 +229,7 @@ export default function MovieBooking() {
   // Load cinemas based on filters
   const loadCinemas = async () => {
     const cityKey = resolveCityKey();
-    console.log("🎬 Loading cinemas with cityKey:", cityKey);
+    /* console.log removed */
 
     if (!cityKey) {
       toast.error("Vui lòng chọn khu vực");
@@ -242,17 +242,17 @@ export default function MovieBooking() {
 
       // If searching by movie name
       if (movieSearchName.trim()) {
-        console.log("🔍 Searching by movie name:", movieSearchName);
+        /* console.log removed */
         data = await searchCinemasByMovie(movieSearchName, cityKey);
-        console.log("🎬 Found cinemas by movie:", data.length);
+        /* console.log removed */
         if (data.length === 0) {
           toast.info(`Không tìm thấy rạp chiếu phim "${movieSearchName}"`);
         }
       } else {
         // Normal search by location
-        console.log("📍 Searching by location:", cityKey);
+        /* console.log removed */
         data = await searchCinemas(cityKey);
-        console.log("🎬 Found cinemas:", data.length, data);
+        /* console.log removed */
         if (data.length === 0) {
           toast.info("Không tìm thấy rạp phim tại khu vực này");
         }
@@ -265,9 +265,7 @@ export default function MovieBooking() {
       } else if (ratingFilter === "4.5+") {
         data = data.filter((c) => c.rating >= 4.5);
       }
-      console.log(
-        `⭐ Rating filter ${ratingFilter}: ${beforeFilter} → ${data.length} cinemas`
-      );
+      /* console.log removed */
 
       setCinemas(data);
     } catch (error) {
@@ -436,7 +434,7 @@ export default function MovieBooking() {
   // Step 3: Load accounts
   const loadAccounts = async () => {
     const user = fbAuth.currentUser;
-    console.log("🔐 Loading accounts for user:", user?.uid);
+    /* console.log removed */
 
     if (!user) {
       console.error("❌ No user logged in");
@@ -455,23 +453,19 @@ export default function MovieBooking() {
       const snap = await get(accountsRef);
 
       if (!snap.exists()) {
-        console.log("📊 No accounts found in database");
+        /* console.log removed */
         setAccounts([]);
         toast.error("Bạn chưa có tài khoản thanh toán");
         setLoadingAccounts(false);
         return;
       }
 
-      console.log("📊 Total accounts in database:", snap.size);
+      /* console.log removed */
 
       const accountList: Account[] = [];
       snap.forEach((child) => {
         const v = child.val();
-        console.log(
-          `🔍 Checking account ${child.key}: uid=${v?.uid}, matches=${
-            v?.uid === user.uid
-          }`
-        );
+        /* console.log removed */
         if (v?.uid === user.uid) {
           const balance =
             typeof v.balance === "number" ? v.balance : Number(v.balance || 0);
@@ -485,7 +479,7 @@ export default function MovieBooking() {
         return false;
       });
 
-      console.log("💳 Account list:", accountList);
+      /* console.log removed */
       setAccounts(accountList);
 
       if (accountList.length === 0) {

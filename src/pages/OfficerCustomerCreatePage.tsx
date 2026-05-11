@@ -31,7 +31,7 @@ const OfficerCustomerCreatePage = () => {
     setIsSubmitting(true);
 
     // TODO: Sau này gọi Firebase để tạo khách hàng
-    console.log("Create customer:", form);
+    /* console.log removed */
 
     // Giả lập delay
     setTimeout(() => {

@@ -211,7 +211,7 @@ async function sendOtpEmailDev(
 ): Promise<void> {
   // DEV fallback (khi chưa cấu hình gateway)
   // eslint-disable-next-line no-console
-  console.log(`[DEV] OTP ${otp} cho ${email} – giao dịch ${txnId}`);
+  /* console.log removed */
 }
 
 type OtpEmailGatewayRequest = {

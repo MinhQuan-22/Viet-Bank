@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import type { UtilityType } from "@/pages/utilities/utilityTypes";
-import DevSeedOfficersPage from "@/pages/DevSeedOfficers";
 
 // Transfer pages
 import TransferBiometricConfirm from "@/pages/TransferBiometricConfirm";
@@ -247,9 +246,7 @@ const App = () => (
               </>
             }
           />
-          {/* Dev seed officers */}
-          <Route path="/dev-seed-officers" element={<DevSeedOfficersPage />} />
-          <Route
+          {/* Notifications */}
             path="/notifications"
             element={
               <>

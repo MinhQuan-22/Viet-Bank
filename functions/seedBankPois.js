@@ -248,7 +248,7 @@ async function seedDocs(targetDb, dataList) {
 
 async function seed() {
   const { created, skipped } = await seedDocs(db, seedData);
-  console.log(`Seed done. Created: ${created}, skipped: ${skipped}`);
+  /* console.log removed */
 }
 
 if (require.main === module) {

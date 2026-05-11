@@ -77,7 +77,7 @@ const OfficerAccountDetailPage = () => {
     setIsSaving(true);
 
     // TODO: sau này gọi Firebase/API để cập nhật lãi suất
-    console.log("Update interest rate", { accountId, newRate: rate });
+    /* console.log removed */
 
     setTimeout(() => {
       setIsSaving(false);

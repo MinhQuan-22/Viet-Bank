@@ -161,10 +161,7 @@ const OfficerCreateCustomer = () => {
     }
 
     // DEMO: log dữ liệu ra console, sau này gửi lên backend/Firebase
-    console.log("Officer create new customer (demo):", {
-      ...validated,
-      accountType: "CHECKING_DEFAULT",
-    });
+    /* console.log removed */
 
     toast.success(
       "Tạo tài khoản khách hàng thành công (demo). Đã mở 1 tài khoản thanh toán mặc định."

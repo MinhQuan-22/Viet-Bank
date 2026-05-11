@@ -1,66 +1,61 @@
-# 🏦 VietBank - Digital Banking Application
+# VietBank - Digital Banking Application
 
-Ứng dụng ngân hàng số hiện đại, đa nền tảng, tích hợp hệ sinh thái dịch vụ đa dạng.
+## Overview
+VietBank is a comprehensive digital banking platform designed to provide a secure, convenient, and modern financial experience for both individual customers and bank officers. The system integrates fundamental financial transactions with lifestyle services such as hotel and movie ticket bookings, creating a closed-loop digital service ecosystem.
 
----
+## Tech Stack
+- **Frontend:** React 18, TypeScript, Vite, Tailwind CSS, Shadcn UI, Framer Motion, Recharts
+- **Backend:** Firebase (BaaS), Firebase Functions (Node.js) for serverless business logic
+- **Database:** Cloud Firestore (Structured data) & Realtime Database (Instant sync data)
+- **Tools:** Capacitor (Mobile Hybrid), EmailJS (OTP gateway), Cloudinary (eKYC)
 
-## 📖 Giới Thiệu Tổng Quan
+## Key Features
+- **Account Management:** Real-time tracking of balances, account details (Checking, Saving, Mortgage), and transaction history.
+- **Transfers:** Internal and interbank transfers with secure OTP/Biometric authentication workflows.
+- **QR Payments:** Integrated QR code scanner and personal QR code generation for quick receiving.
+- **Electronic KYC (eKYC):** Online identity verification and document update workflow.
+- **Lifestyle Utilities:** Hotel booking with map integration and movie ticket booking with seat selection.
+- **Officer Dashboard:** Comprehensive customer management, transaction monitoring, and interest rate configuration.
 
-**VietBank** là một nền tảng ngân hàng số (Digital Banking) toàn diện, được thiết kế để cung cấp trải nghiệm tài chính an toàn, tiện lợi và hiện đại cho cả khách hàng cá nhân và nhân viên ngân hàng. Hệ thống không chỉ dừng lại ở các giao dịch tài chính cơ bản mà còn tích hợp các dịch vụ lối sống như đặt phòng khách sạn và đặt vé xem phim, tạo nên một hệ sinh thái dịch vụ số khép kín.
+## My Responsibilities
+- Backend development and serverless functions integration
+- Database design (Firestore and Realtime Database structure)
+- API integration for third-party services (EmailJS, Cloudinary, Geocoding)
+- Testing/documentation (Unit testing with Vitest, property-based testing)
 
----
+## Screenshots
+*(Add images here - e.g. test pass screenshot, transaction flow, dashboard)*
 
-## ✨ Tính Năng & Chức Năng Chính
+## Setup Instructions
+1. Clone repository
+2. Install dependencies:
+   ```bash
+   npm install
+   cd functions && npm install
+   ```
+3. Configure environment variables (Use the provided `.env.example` as a reference. Ensure no real keys are committed):
+   ```bash
+   cp .env.example .env
+   ```
+4. Run project locally:
+   ```bash
+   npm run dev
+   ```
+5. Run automated tests to verify integrity:
+   ```bash
+   npm run test
+   ```
 
-### 👤 Dành Cho Khách Hàng (Customer)
-*   **Quản Lý Tài Khoản:** Theo dõi số dư, chi tiết tài khoản (Thanh toán, Tiết kiệm, Vay) và lịch sử giao dịch thời gian thực.
-*   **Chuyển Tiền:** Chuyển khoản nội bộ và liên ngân hàng với quy trình xác thực OTP/Sinh trắc học an toàn.
-*   **Thanh Toán QR:** Tích hợp trình quét mã QR và tạo mã QR cá nhân để nhận tiền nhanh chóng.
-*   **Định Danh Điện Tử (E-KYC):** Quy trình đăng ký và xác thực danh tính trực tuyến, cập nhật hồ sơ giấy tờ dễ dàng.
-*   **Tiện Ích Lối Sống:** 
-    *   **Đặt Phòng Khách Sạn:** Tìm kiếm và đặt phòng trực tiếp trên bản đồ tích hợp.
-    *   **Đặt Vé Xem Phim:** Chọn phim, rạp và chỗ ngồi thuận tiện.
-*   **Thông Báo:** Hệ thống thông báo biến động số dư và tin tức tức thì.
+See [README.txt](./README.txt) for detailed setup instructions and database seeding.
 
-### 👨‍💼 Dành Cho Nhân Viên (Bank Officer)
-*   **Quản Lý Khách Hàng:** Quản lý danh sách khách hàng, tạo tài khoản mới và duyệt hồ sơ E-KYC.
-*   **Giám Sát Giao Dịch:** Theo dõi các hoạt động giao dịch trong hệ thống.
-*   **Quản Lý Lãi Suất:** Cập nhật bảng lãi suất tiết kiệm và cho vay linh hoạt.
+## Demo Accounts
+- **Admin/Officer:** `officer@vietbank.com` (Check README.txt for password/OTP details)
+- **User:** `user@vietbank.com` (Check README.txt for password/OTP details)
 
----
+## Known Limitations
+- The application uses Firebase Emulators for local development. Some edge cases related to production-level Firebase limitations might not be fully tested.
+- Cinema service currently loads all showtimes locally without explicit indexing (to be optimized).
+- Officer/Admin features like creating customers and accounts currently use placeholder logic to be integrated with Firebase later.
 
-## 🛠️ Công Nghệ Sử Dụng (Tech Stack)
-
-### 💻 Frontend
-*   **Ngôn ngữ:** TypeScript, JavaScript (ES6+)
-*   **Framework:** React 18
-*   **Công cụ build:** Vite (Siêu nhanh)
-*   **UI/UX:** 
-    *   Tailwind CSS (Styling)
-    *   Shadcn UI (Component Library)
-    *   Lucide React (Icons)
-    *   Framer Motion (Animations)
-    *   Recharts (Biểu đồ tài chính)
-
-### ⚙️ Backend & Infrastructure
-*   **Nền tảng:** Firebase (BaaS)
-*   **Serverless Functions:** Firebase Functions (Node.js) để xử lý logic backend phức tạp và bảo mật.
-*   **Xác thực:** Firebase Authentication (Hỗ trợ OTP, Email/Password).
-
-### 🗄️ Cơ Sở Dữ Liệu (Database)
-Hệ thống sử dụng kết hợp hai loại cơ sở dữ liệu của Google Firebase để tối ưu hiệu suất:
-*   **Cloud Firestore:** Lưu trữ dữ liệu có cấu trúc như thông tin khách sạn, rạp phim, lịch sử giao dịch và dữ liệu E-KYC.
-*   **Realtime Database:** Lưu trữ các dữ liệu cần đồng bộ tức thì như số dư tài khoản, trạng thái người dùng và cấu hình hệ thống.
-
-### 📱 Mobile (Hybrid)
-*   **Capacitor:** Hỗ trợ đóng gói ứng dụng lên các nền tảng Android và iOS với hiệu suất cao.
-
----
-
-## 🚀 Bắt Đầu Ngay
-
-Vui lòng tham khảo tệp [README.txt](file:///Users/chudinhminhquan/green-bank-app-main/README.txt) để biết hướng dẫn chi tiết về cách cài đặt, khởi chạy hệ thống và thông tin tài khoản đăng nhập thử nghiệm.
-
----
-
-**VietBank** - *Vươn tầm trải nghiệm số.*
+## Notes
+This is an academic/personal project built for learning and portfolio purposes.

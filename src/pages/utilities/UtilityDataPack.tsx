@@ -269,24 +269,24 @@ export default function UtilityDataPack({ formData, setFormData }: Props) {
     price: number;
     description?: string;
   }) => {
-    console.log("=== handleDataPackPayment called ===");
-    console.log("pack:", pack);
-    console.log("formData.dataPhone:", formData.dataPhone);
-    console.log("account:", account);
-    console.log("isVerified:", isVerified);
-    console.log("isMua3G4G:", isMua3G4G);
+    /* console.log removed */
+    /* console.log removed */
+    /* console.log removed */
+    /* console.log removed */
+    /* console.log removed */
+    /* console.log removed */
 
     // Validate phone number
     const phoneToUse = isMua3G4G ? formData.dataPhone : formData.dataPhone;
     if (!validatePhoneNumber(phoneToUse)) {
-      console.log("ERROR: Invalid phone number");
+      /* console.log removed */
       toast.error("Vui lòng nhập số điện thoại hợp lệ");
       return;
     }
 
     // Validate account
     if (!account || !account.accountNumber) {
-      console.log("ERROR: No account found");
+      /* console.log removed */
       toast.error("Không tìm thấy tài khoản thanh toán");
       return;
     }
@@ -295,14 +295,14 @@ export default function UtilityDataPack({ formData, setFormData }: Props) {
     // Không cần kiểm tra eKYC ở đây vì đã kiểm tra trong handleContinuePayment() rồi
     // Chỉ kiểm tra eKYC khi gọi trực tiếp từ Data 4G tab (không qua modal)
     if (!isMua3G4G && !isVerified) {
-      console.log("ERROR: eKYC not verified (Data 4G tab)");
+      /* console.log removed */
       toast.error(
         "Khách hàng chưa hoàn tất eKYC nên không thể thực hiện thanh toán"
       );
       return;
     }
 
-    console.log("=== All validations passed, navigating to PIN screen ===");
+    /* console.log removed */
     // Navigate to PIN screen with payment request
     navigate("/utilities/pin", {
       state: {
@@ -326,31 +326,31 @@ export default function UtilityDataPack({ formData, setFormData }: Props) {
         returnPath: "/utilities/data",
       },
     });
-    console.log("=== Navigate called ===");
+    /* console.log removed */
   };
 
   // ✅ [PATCH-MUA3G4G-PAYMENT-MODAL] Hàm xử lý thanh toán từ modal
   const handlePaymentFromModal = () => {
-    console.log("=== handlePaymentFromModal called ===");
-    console.log("selectedPackForContinue:", selectedPackForContinue);
-    console.log("selectedAccountForPayment:", selectedAccountForPayment);
-    console.log("account:", account);
-    console.log("isVerified:", isVerified);
-    console.log("isMua3G4G:", isMua3G4G);
+    /* console.log removed */
+    /* console.log removed */
+    /* console.log removed */
+    /* console.log removed */
+    /* console.log removed */
+    /* console.log removed */
 
     if (!selectedPackForContinue) {
-      console.log("ERROR: No pack selected");
+      /* console.log removed */
       toast.error("Vui lòng chọn gói cước");
       return;
     }
 
     if (!selectedAccountForPayment) {
-      console.log("ERROR: No account selected");
+      /* console.log removed */
       toast.error("Vui lòng chọn tài khoản thanh toán");
       return;
     }
 
-    console.log("=== Closing modal and calling handleDataPackPayment ===");
+    /* console.log removed */
     // Close modal
     setShowPaymentModal(false);
 

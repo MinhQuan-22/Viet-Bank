@@ -179,7 +179,7 @@ async function lockUserAndSourceAccount(uid: string, sourceAccountNumber: string
   });
 
   // ✅ debug nhẹ (không ảnh hưởng logic)
-  // console.log("[LOCK_ACCOUNT_OK]", { uid, sourceAccountNumber, key: resolved.key });
+  // /* console.log removed */
 }
 
 async function recordBiometricFailure(

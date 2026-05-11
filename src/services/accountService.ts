@@ -609,7 +609,7 @@ async function sendOtpEmailViaGAS(params: {
 
   if (!webappUrl) {
     // eslint-disable-next-line no-console
-    console.log(`[DEV] OTP ${params.otp} -> ${params.toEmail} (txn ${params.transactionId})`);
+    /* console.log removed */
     return false;
   }
 

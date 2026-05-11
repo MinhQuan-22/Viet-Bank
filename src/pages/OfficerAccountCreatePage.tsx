@@ -34,11 +34,7 @@ const OfficerAccountCreatePage = () => {
     setIsSubmitting(true);
 
     // TODO: sau này gọi Firebase để tạo account
-    console.log("Create account:", {
-      customerId,
-      type,
-      form,
-    });
+    /* console.log removed */
 
     setTimeout(() => {
       setIsSubmitting(false);

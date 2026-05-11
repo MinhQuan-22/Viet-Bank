@@ -98,19 +98,15 @@ export default function UtilityMobileHistory() {
       // ✅ Lọc theo type: DATA_PACK_PURCHASE cho tab data, PHONE_TOPUP cho tab phone
       const txnType = tab === "data" ? "DATA_PACK_PURCHASE" : "PHONE_TOPUP";
 
-      console.log("🔍 Loading transactions for:", {
-        userId: user.uid,
-        tab,
-        txnType,
-      });
+      /* console.log removed */
 
       // ✅ Lấy TẤT CẢ transactions (không filter bằng query)
       const snapshot = await get(txnRef);
 
-      console.log("📊 Snapshot exists:", snapshot.exists());
+      /* console.log removed */
 
       if (!snapshot.exists()) {
-        console.log("⚠️ No transactions found for user");
+        /* console.log removed */
         setTransactions([]);
         setLoading(false);
         return;
@@ -124,13 +120,7 @@ export default function UtilityMobileHistory() {
         totalCount++;
         const data = child.val();
 
-        console.log(`📝 Transaction ${totalCount}:`, {
-          key: child.key,
-          type: data.type,
-          userId: data.userId,
-          amount: data.amount,
-          phoneNumber: data.phoneNumber,
-        });
+        /* console.log removed */
 
         // ✅ Lọc theo userId VÀ type
         if (data.userId === user.uid && data.type === txnType) {
@@ -152,9 +142,7 @@ export default function UtilityMobileHistory() {
         }
       });
 
-      console.log(
-        `✅ Found ${matchedCount} matching transactions out of ${totalCount} total`
-      );
+      /* console.log removed */
 
       // Sắp xếp theo thời gian mới nhất
       txnList.sort((a, b) => b.createdAt - a.createdAt);
